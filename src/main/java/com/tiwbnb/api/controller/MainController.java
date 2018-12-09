@@ -1,5 +1,6 @@
 package com.tiwbnb.api.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tiwbnb.api.domains.House;
@@ -58,6 +60,19 @@ public class MainController {
 		if (houses.isEmpty()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 		}
+		return ResponseEntity.status(HttpStatus.OK).body(houses);
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value="/houses")
+	public ResponseEntity<List <House>> search(
+			@RequestParam(value = "city", required = false) String city,
+			@RequestParam(value = "price", required = false) Float price,
+			@RequestParam(value = "maxGuests", required = false) Integer maxGuests,
+			@RequestParam(value = "shared", required = false) Boolean shared,
+			@RequestParam(value = "startDate", required = false) Date startDate,
+			@RequestParam(value = "endDate", required = false) Date endDate) {
+		
+		List<House> houses = daohouse.find(city, price, maxGuests, shared, startDate, endDate);
 		return ResponseEntity.status(HttpStatus.OK).body(houses);
 	}
 
