@@ -9,6 +9,7 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface HouseDAO extends CrudRepository<House, Long>{
 	public Optional<House> findById(long id);
+	public List<House> findByOwnerId(Long id);
 	
 	@Query(value = "SELECT * FROM house h WHERE (?1 = null OR city = ?1) " 
 			+ "AND (?2 = null OR price > ?2) AND (?3 = null OR price < ?3) "
