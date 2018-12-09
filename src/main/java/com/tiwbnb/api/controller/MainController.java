@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -66,13 +67,16 @@ public class MainController {
 	@RequestMapping(method = RequestMethod.GET, value="/houses")
 	public ResponseEntity<List <House>> search(
 			@RequestParam(value = "city", required = false) String city,
-			@RequestParam(value = "price", required = false) Float price,
-			@RequestParam(value = "maxGuests", required = false) Integer maxGuests,
+			@RequestParam(value = "minPrice", required = false) Float minPrice,
+			@RequestParam(value = "maxPrice", required = false) Float maxPrice,
+			@RequestParam(value = "guestCount", required = false) Integer guestCount,
 			@RequestParam(value = "shared", required = false) Boolean shared,
-			@RequestParam(value = "startDate", required = false) Date startDate,
-			@RequestParam(value = "endDate", required = false) Date endDate) {
+			@RequestParam(value = "startDate", required = false) 
+				@DateTimeFormat(pattern = "MM/dd/yyyy") Date startDate,
+			@RequestParam(value = "endDate", required = false) 
+				@DateTimeFormat(pattern = "MM/dd/yyyy") Date endDate) {
 		
-		List<House> houses = daohouse.find(city, price, maxGuests, shared, startDate, endDate);
+		List<House> houses = daohouse.find(city, minPrice, maxPrice, guestCount, shared, startDate, endDate);
 		return ResponseEntity.status(HttpStatus.OK).body(houses);
 	}
 
