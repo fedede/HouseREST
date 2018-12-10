@@ -33,7 +33,7 @@ public class House {
 	private Boolean shared;
 	
 	@ManyToOne (cascade=CascadeType.REMOVE)
-	@JoinColumn(name="ownerId")
+	@JoinColumn(name="owner_id")
 	private User owner;
 
 	public House(){
@@ -72,7 +72,6 @@ public class House {
 	public String getImageUrl() {
 		return imageUrl;
 	}
-
 
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
@@ -127,10 +126,17 @@ public class House {
 	public void setShortDescription(String shortDescription) {
 		this.shortDescription = shortDescription;
 	}
+	
+	public Date getEndDate() {
+		return this.endDate;
+	}
+
+	public Date getStartDate() {
+		return this.startDate;
+	}
 
 
-	public long getId() {
-		// TODO Auto-generated method stub
+	public Long getId() {
 		return this.id;
 	}
 

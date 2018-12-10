@@ -29,6 +29,7 @@ public class MainController {
 	public ResponseEntity<House> publishHouse(@RequestBody @Validated House pHouse) {
 		House newHouse = daohouse.save(pHouse);
 		if (newHouse == null) {
+			
 			return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).body(null);
 		}
 		return ResponseEntity.status(HttpStatus.CREATED).body(newHouse);

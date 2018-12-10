@@ -1,6 +1,7 @@
 package com.tiwbnb.api.domains;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -24,7 +25,7 @@ public class User implements Serializable {
 	private String surname;
 	@JsonProperty(access = Access.WRITE_ONLY)
 	private String password;
-	private boolean isAdmin;
+	private boolean admin;
 	/*
 	@OneToMany (mappedBy="user",
 				cascade=CascadeType.ALL,
@@ -68,11 +69,16 @@ public class User implements Serializable {
 	}
 
 	public boolean isAdmin() {
-		return isAdmin;
+		return admin;
 	}
 
 	public void setAdmin(boolean isAdmin) {
-		this.isAdmin = isAdmin;
+		this.admin = isAdmin;
 	}
+	
+	public Long getId() {
+		return this.id;
+	}
+
 
 }
