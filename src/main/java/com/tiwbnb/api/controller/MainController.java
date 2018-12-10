@@ -79,9 +79,9 @@ public class MainController {
 			@RequestParam(value = "guestCount", required = false) Integer guestCount,
 			@RequestParam(value = "shared", required = false) Boolean shared,
 			@RequestParam(value = "startDate", required = false) 
-				@DateTimeFormat(pattern = "MM/dd/yyyy") Date startDate,
+			@DateTimeFormat(pattern = "MM/dd/yyyy") Date startDate,
 			@RequestParam(value = "endDate", required = false) 
-				@DateTimeFormat(pattern = "MM/dd/yyyy") Date endDate) {
+			@DateTimeFormat(pattern = "MM/dd/yyyy") Date endDate) {
 		
 		List<House> houses = daohouse.find(city, minPrice, maxPrice, guestCount, shared, startDate, endDate);
 		return ResponseEntity.status(HttpStatus.OK).body(houses);
