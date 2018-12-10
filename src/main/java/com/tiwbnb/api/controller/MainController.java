@@ -53,7 +53,7 @@ public class MainController {
 		return ResponseEntity.status(HttpStatus.OK).body(house);
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, value="/houses/{houseId}")
+	@RequestMapping(method = RequestMethod.GET, value="/house/{houseId}")
 	public ResponseEntity<House> findHouseById(@PathVariable @Validated Long houseId) {
 		House house = daohouse.findById(houseId).orElse(null);
 		if (house == null) {
@@ -62,14 +62,6 @@ public class MainController {
 		return ResponseEntity.status(HttpStatus.OK).body(house);
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, value="/houses/{city}")
-	public ResponseEntity<List <House>> findHouses(@PathVariable @Validated String city) {
-		List<House> houses = daohouse.findByCity(city);
-		if (houses.isEmpty()) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-		}
-		return ResponseEntity.status(HttpStatus.OK).body(houses);
-	}
 	
 	@RequestMapping(method = RequestMethod.GET, value="/houses")
 	public ResponseEntity<List <House>> search(
