@@ -79,4 +79,11 @@ public class MainController {
 		return ResponseEntity.status(HttpStatus.OK).body(houses);
 	}
 
+	@RequestMapping(method = RequestMethod.DELETE, value="/house/{id}")
+	public void deleteHouse(@PathVariable @Validated Long id) {
+		House house = daohouse.findById(id).orElse(null);
+		if (house != null) {
+			daohouse.delete(house);
+		}
+	}
 }

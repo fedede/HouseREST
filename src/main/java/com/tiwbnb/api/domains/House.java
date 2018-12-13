@@ -32,7 +32,7 @@ public class House {
 	private Float price;
 	private Boolean shared;
 	
-	@ManyToOne (cascade=CascadeType.REMOVE)
+	@ManyToOne
 	@JoinColumn(name="owner_id")
 	private User owner;
 
