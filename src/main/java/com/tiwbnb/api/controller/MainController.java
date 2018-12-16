@@ -87,12 +87,13 @@ public class MainController {
 	public void deleteHouse(@PathVariable @Validated Long id) {
 		System.out.println("ID: " + id);
 		House house = daohouse.findById(id).orElse(null);
-		List <Transaction> trs= daotransaction.findByHouseId(id);
-		
+		//List <Transaction> trs= daotransaction.findByHouseId(id);
+		/*
 		for(Transaction t: trs){
 			daotransaction.delete(t);
 		}
 		System.out.println("OWNER: " + house.getOwner().getId());
+		*/
 		if (house != null) {
 			daohouse.deleteById(house.getId());
 		}
