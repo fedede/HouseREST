@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tiwbnb.api.domains.House;
 import com.tiwbnb.api.domains.HouseDAO;
-import com.tiwbnb.api.domains.Transaction;
 import com.tiwbnb.api.domains.TransactionDAO;
 
 @RestController

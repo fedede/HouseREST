@@ -1,7 +1,6 @@
 package com.tiwbnb.api.domains;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
