@@ -1,6 +1,7 @@
 package com.tiwbnb.api.domains;
 
 import java.util.Date;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -11,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -32,8 +34,11 @@ public class House {
 	private Float price;
 	private Boolean shared;
 	
-	@ManyToOne
-	@JoinColumn(name="owner_id")
+	@OneToMany(mappedBy = "house", cascade = CascadeType.REMOVE, orphanRemoval = true)
+	private Set<Transaction> transactions = new LinkedHashSet<Transaction>();
+	
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	//@JoinColumn(name="owner_id")
 	private User owner;
 
 	public House(){
@@ -47,7 +52,7 @@ public class House {
 	public User getOwner(){
 		return owner;
 	}
-
+	
 
 	public String getCity() {
 		return city;

@@ -2,6 +2,7 @@ package com.tiwbnb.api.domains;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -26,13 +27,19 @@ public class User implements Serializable {
 	@JsonProperty(access = Access.WRITE_ONLY)
 	private String password;
 	private boolean admin;
-	/*
-	@OneToMany (mappedBy="user",
-				cascade=CascadeType.ALL,
-				fetch = FetchType.EAGER)
-	//@JoinColumn(name="email")
-	Set<House> house;	
-*/
+	
+	@OneToMany (mappedBy="owner", cascade=CascadeType.REMOVE, orphanRemoval = true)
+	Set<House> houses = new LinkedHashSet<House>();
+	
+	@OneToMany (mappedBy="invoiced", cascade=CascadeType.REMOVE, orphanRemoval = true)
+	Set<Transaction> transactions = new LinkedHashSet<Transaction>();
+	
+	@OneToMany (mappedBy="receiver", cascade=CascadeType.REMOVE, orphanRemoval = true)
+	Set<Message> messagesReceived = new LinkedHashSet<Message>();
+	
+	@OneToMany (mappedBy="sender", cascade=CascadeType.REMOVE, orphanRemoval = true)
+	Set<Message> messagesSent = new LinkedHashSet<Message>();
+
 	public User() {
 	}
 	

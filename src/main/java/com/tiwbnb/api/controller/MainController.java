@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tiwbnb.api.domains.House;
 import com.tiwbnb.api.domains.HouseDAO;
+import com.tiwbnb.api.domains.Transaction;
+import com.tiwbnb.api.domains.TransactionDAO;
 
 @RestController
 @CrossOrigin
@@ -25,6 +27,8 @@ public class MainController {
 	
 	@Autowired
 	HouseDAO daohouse;
+	@Autowired
+	TransactionDAO daotransaction;
 	
 	@RequestMapping(method = RequestMethod.GET, value="users/{userId}/houses")
 	public ResponseEntity<List <House>> findUserHouses(@PathVariable @Validated Long userId) {
@@ -81,9 +85,16 @@ public class MainController {
 
 	@RequestMapping(method = RequestMethod.DELETE, value="/house/{id}")
 	public void deleteHouse(@PathVariable @Validated Long id) {
+		System.out.println("ID: " + id);
 		House house = daohouse.findById(id).orElse(null);
+		List <Transaction> trs= daotransaction.findByHouseId(id);
+		
+		for(Transaction t: trs){
+			daotransaction.delete(t);
+		}
+		System.out.println("OWNER: " + house.getOwner().getId());
 		if (house != null) {
-			daohouse.delete(house);
+			daohouse.deleteById(house.getId());
 		}
 	}
 }

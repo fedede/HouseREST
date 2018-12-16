@@ -19,4 +19,5 @@ public interface HouseDAO extends CrudRepository<House, Long>{
 	public List<House> find(String city, Float minPrice, Float maxPrice, Integer maxGuests, 
 			Boolean shared, Date startDate, Date endDate);
 	public List<House> findByCity(String city);
+	public void deleteById(Long id);
 }
